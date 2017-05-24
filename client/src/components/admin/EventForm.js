@@ -5,16 +5,13 @@ import validateInput from '../../utils/eventValidation';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class EventForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      _id: this.props.gymclass ? this.props.gymclass._id : null,
-      title: this.props.gymclass ? this.props.gymclass.title : '',
-      date: this.props.gymclass ? this.props.gymclass.date : '',
-      errors: {},
-      isLoading: false
-    };
-  }
+  state = {
+    _id: this.props.gymclass ? this.props.gymclass._id : null,
+    title: this.props.gymclass ? this.props.gymclass.title : '',
+    date: this.props.gymclass ? this.props.gymclass.date : '',
+    errors: {},
+    isLoading: false
+  };
 
   componentWillReceiveProps = (nextProps) => {
     this.setState({

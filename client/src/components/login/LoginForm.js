@@ -8,18 +8,12 @@ import { login } from '../../actions/authActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      identifier: '',
-      password: '',
-      errors: {},
-      isLoading: false
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+  state = {
+    identifier: '',
+    password: '',
+    errors: {},
+    isLoading: false
+  };
 
   isValid() {
     const { errors, isValid } = validateInput(this.state);
@@ -31,7 +25,7 @@ class LoginForm extends React.Component {
     return isValid;
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true }, () => {
@@ -49,7 +43,7 @@ class LoginForm extends React.Component {
     }
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     if (!!this.state.errors[e.target.name]){
       let errors = Object.assign({}, this.state.errors);
       delete errors[e.target.name];

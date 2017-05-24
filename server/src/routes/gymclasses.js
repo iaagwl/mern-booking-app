@@ -8,16 +8,24 @@ import GymClass from '../models/gymclass';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  GymClass.find({}, 'title date _id').then( gymclasses => {
-    res.json({ gymclasses });
-  });
+  GymClass.find({}, 'title date _id')
+    .then( gymclasses => res.json({ gymclasses }))
+    .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
 });
 
 router.get('/:_id', (req, res) => {
-  GymClass.findById(req.params._id).then(gymclass => {
-    res.json({ gymclass })
-  });
+  GymClass.findById(req.params._id)
+    .then(gymclass => res.json({ gymclass }))
+    .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
 });
+
+router.delete('/:_id', authenticate, (req, res) => {
+  console.log(req.currentUser);
+  GymClass.findByIdAndRemove(req.params._id)
+    .then(gymclass => res.json({ gymclass }))
+    .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
+});
+
 
 router.post('/', authenticate, (req, res) => {
   let { errors, isValid } = validateInput(req.body);

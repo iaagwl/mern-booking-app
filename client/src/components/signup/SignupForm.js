@@ -5,21 +5,14 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../utils/signupValidation';
 
 class SignupForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      errors: {},
-      isLoading: false,
-      invalid: false
-    }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.checkUserExists = this.checkUserExists.bind(this);
+  state = {
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+    errors: {},
+    isLoading: false,
+    invalid: false
   }
 
   isValid() {
@@ -31,7 +24,7 @@ class SignupForm extends React.Component {
     return isValid;
   }
 
-  checkUserExists(e) {
+  checkUserExists = (e) => {
     const field = e.target.name;
     const val = e.target.value;
     if (val !== '') {
@@ -39,7 +32,7 @@ class SignupForm extends React.Component {
         let errors = this.state.errors;
         let invalid;
         if (res.data.user.length) {
-          errors[field] = field + ' already exists';
+          errors[field] = field.charAt(0).toUpperCase() + field.slice(1) + ' already exists';
           invalid = true;
         } else {
           errors[field] = '';
@@ -50,7 +43,7 @@ class SignupForm extends React.Component {
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     if (this.isValid()){
@@ -68,7 +61,7 @@ class SignupForm extends React.Component {
     }
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     if (!!this.state.errors[e.target.name]){
       let errors = Object.assign({}, this.state.errors);
       delete errors[e.target.name];

@@ -7,12 +7,9 @@ import { createEvent, updateEvent } from '../../actions/eventActions';
 import { fetchClass } from '../../actions/classesActions';
 
 class AdminPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      redirect: false
-    };
-  }
+  state = {
+    redirect: false
+  };
 
   componentDidMount = () => {
     const { match } = this.props;
@@ -34,7 +31,6 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {

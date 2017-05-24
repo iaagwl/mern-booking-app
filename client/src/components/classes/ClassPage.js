@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ClassList from './ClassList';
 import { fetchClasses } from '../../actions/classesActions.js';
+import { deleteEvent } from '../../actions/eventActions.js';
 
 class ClassPage extends React.Component {
   componentDidMount() {
@@ -14,7 +15,11 @@ class ClassPage extends React.Component {
       <div>
         <h1>Classes:</h1>
 
-        <ClassList gymclasses={this.props.gymclasses} isAuthenticated={this.props.auth.isAuthenticated}/>
+        <ClassList
+          gymclasses={this.props.gymclasses}
+          isAuthenticated={this.props.auth.isAuthenticated}
+          deleteClass={this.props.deleteEvent}
+        />
       </div>
     );
   }
@@ -24,7 +29,8 @@ class ClassPage extends React.Component {
 ClassPage.propTypes = {
   auth: PropTypes.object.isRequired,
   gymclasses: PropTypes.array.isRequired,
-  fetchClasses: PropTypes.func.isRequired
+  fetchClasses: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
@@ -34,4 +40,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchClasses })(ClassPage);
+export default connect(mapStateToProps, { fetchClasses, deleteEvent })(ClassPage);
