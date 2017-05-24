@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import validateInput from '../../utils/eventValidation';
-import { createEvent, updateEvent } from '../../actions/eventActions';
-import { fetchClass } from '../../actions/classesActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class EventForm extends React.Component {
@@ -16,15 +12,11 @@ class EventForm extends React.Component {
       title: this.props.gymclass ? this.props.gymclass.title : '',
       date: this.props.gymclass ? this.props.gymclass.date : '',
       errors: {},
-      isLoading: false,
-      done: false
+      isLoading: false
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = (nextProps) => {
     this.setState({
       _id: nextProps.gymclass._id,
       title: nextProps.gymclass.title,
@@ -32,14 +24,7 @@ class EventForm extends React.Component {
     })
   }
 
-  componentDidMount() {
-    const { match } = this.props;
-    if (match.params._id) {
-      this.props.fetchClass(match.params._id);
-    }
-  }
-
-  handleChange(e) {
+  handleChange = (e) => {
     if (!!this.state.errors[e.target.name]){
       let errors = Object.assign({}, this.state.errors);
       delete errors[e.target.name];
@@ -54,30 +39,19 @@ class EventForm extends React.Component {
 
   isValid() {
     const { errors, isValid } = validateInput(this.state);
-
     if (!isValid) {
       this.setState({ errors });
     }
-
     return isValid;
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.isValid()){
       const { _id, title, date } = this.state;
       this.setState({ errors: {}, isLoading: true });
-      if (_id) {
-        this.props.updateEvent({_id, title, date}).then(
-          () => { this.setState({ done: true })},
-          (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
-        );  ;
-      } else {
-        this.props.createEvent({title, date}).then(
-          () => { this.setState({ done: true })},
-          (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
-        );
-      }
+      this.props.saveClass({ _id, title, date })
+        .catch((err) => this.setState({ errors: err.response.data.errors, isLoading: false }));
     }
   }
 
@@ -114,7 +88,7 @@ class EventForm extends React.Component {
 
     return (
       <div>
-        { this.state.done ? <Redirect to='/classes' /> : form }
+        { form }
       </div>
     );
   }
@@ -122,20 +96,7 @@ class EventForm extends React.Component {
 }
 
 EventForm.propTypes = {
-  createEvent: PropTypes.func.isRequired,
-  updateEvent: PropTypes.func.isRequired,
-  fetchClass: PropTypes.func.isRequired
+  saveClass: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state, props) {
-  const { match } = props
-  if (match.params._id) {
-    return {
-      gymclass: state.gymclasses.find(item => item._id === match.params._id)
-    }
-  }
-
-  return { gymclass: null }
-}
-
-export default connect(mapStateToProps, { createEvent, fetchClass, updateEvent })(EventForm);
+export default EventForm;
