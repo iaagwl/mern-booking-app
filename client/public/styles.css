@@ -1,0 +1,51 @@
+body{
+  line-height: 1.5em;
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+}
+
+/* selected nav */
+.selected{
+  color: green;
+}
+
+/* form validation errors */
+.has-error{
+  color: #ef5350;
+}
+
+/* flash messages */
+.alert{
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+.alert-success{
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-color: #d0e9c6;
+}
+
+.alert-danger{
+  background-color: #f2dede;
+  color: #a94442;
+  border-color: #ebcccc;
+}
+
+button.close{
+  padding: 0;
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  margin-right: 20px;
+}
+
+.close {
+  color: #000;
+  opacity: 0.5;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
