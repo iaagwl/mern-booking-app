@@ -14,7 +14,7 @@ class ClassPage extends React.Component {
       <div>
         <h1>Classes:</h1>
 
-        <ClassList gymclasses={this.props.gymclasses} />
+        <ClassList gymclasses={this.props.gymclasses} isAuthenticated={this.props.auth.isAuthenticated}/>
       </div>
     );
   }
@@ -22,12 +22,14 @@ class ClassPage extends React.Component {
 }
 
 ClassPage.propTypes = {
+  auth: PropTypes.object.isRequired,
   gymclasses: PropTypes.array.isRequired,
   fetchClasses: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     gymclasses: state.gymclasses
   }
 }

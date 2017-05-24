@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GymClass from './GymClass';
 
-export default function ClassList({ gymclasses }) {
+export default function ClassList({ gymclasses, isAuthenticated }) {
   const emptyMessage = (
     <p>There are no upcoming classes</p>
   );
 
   const gymClassList = (
     <div className="ui four cards">
-      { gymclasses.map(gymclass => <GymClass gymclass={gymclass} key={gymclass._id} />) }
+      { gymclasses.map(gymclass => <GymClass gymclass={gymclass} key={gymclass._id} isAuthenticated={isAuthenticated} />) }
     </div>
   );
   return (
