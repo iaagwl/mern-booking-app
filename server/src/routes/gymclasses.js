@@ -25,8 +25,22 @@ router.post('/', authenticate, (req, res) => {
   if (isValid) {
     const { title, date } = req.body;
     GymClass.create({ title, date })
-    .then(event => res.json({ gymclass: event }))
-    .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
+      .then(event => res.json({ gymclass: event }))
+      .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
+  } else {
+    res.status(400).json({ errors });
+  }
+});
+
+router.put('/:_id', authenticate, (req, res) => {
+  console.log(req.currentUser);
+  let { errors, isValid } = validateInput(req.body);
+
+  if (isValid) {
+    const { title, date } = req.body;
+    GymClass.findByIdAndUpdate(req.params._id, { title, date }, { new: true })
+      .then(gymclass => res.json({ gymclass: gymclass }))
+      .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
   } else {
     res.status(400).json({ errors });
   }

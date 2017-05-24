@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import validateInput from '../../utils/eventValidation';
-import { createEvent } from '../../actions/eventActions';
+import { createEvent, updateEvent } from '../../actions/eventActions';
 import { fetchClass } from '../../actions/classesActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
@@ -65,11 +65,19 @@ class EventForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.isValid()){
+      const { _id, title, date } = this.state;
       this.setState({ errors: {}, isLoading: true });
-      this.props.createEvent(this.state).then(
-        () => { this.setState({ done: true })},
-        (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
-      );
+      if (_id) {
+        this.props.updateEvent({_id, title, date}).then(
+          () => { this.setState({ done: true })},
+          (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
+        );  ;
+      } else {
+        this.props.createEvent({title, date}).then(
+          () => { this.setState({ done: true })},
+          (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
+        );
+      }
     }
   }
 
@@ -114,7 +122,9 @@ class EventForm extends React.Component {
 }
 
 EventForm.propTypes = {
-  createEvent: PropTypes.func.isRequired
+  createEvent: PropTypes.func.isRequired,
+  updateEvent: PropTypes.func.isRequired,
+  fetchClass: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state, props) {
@@ -128,4 +138,4 @@ function mapStateToProps(state, props) {
   return { gymclass: null }
 }
 
-export default connect(mapStateToProps, { createEvent, fetchClass })(EventForm);
+export default connect(mapStateToProps, { createEvent, fetchClass, updateEvent })(EventForm);
