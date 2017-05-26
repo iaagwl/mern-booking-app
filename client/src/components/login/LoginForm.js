@@ -82,6 +82,7 @@ class LoginForm extends React.Component {
 
         <input disabled={isLoading}
           type="submit"
+          className="ui primary button"
         />
       </form>
     );

@@ -8,6 +8,7 @@ import User from '../models/user';
 
 const router = express.Router();
 
+
 function validateInput(data, otherValidations) {
 
   let { errors } = otherValidations(data);
@@ -46,6 +47,7 @@ router.get('/:identifier', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(req.body);
   validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
     if (isValid) {
       const { username, password, email } = req.body;

@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 class FlashMessage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
 
-  handleClick() {
+  handleClick = () => {
     this.props.deleteFlashMessage(this.props.message.id);
   }
 

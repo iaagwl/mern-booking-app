@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { SET_GYM_CLASSES } from './constants';
-import { GYM_CLASS_FETCHED } from './constants';
+import { SET_GYM_CLASSES, GYM_CLASS_FETCHED } from './constants';
 
 export function setClasses(gymclasses) {
   return {

@@ -7,13 +7,16 @@ import users from './routes/users';
 import auth from './routes/auth';
 import gymclasses from './routes/gymclasses';
 
+import adminInit from './utils/init/adminInit';
+
 const app = express();
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost/mern-booking-app');
 
 mongoose.connection.once('open', () => {
-    console.log('connected to db mongodb://localhost/mern-booking-app');
+    console.log('Connected to db mongodb://localhost/mern-booking-app');
+    adminInit();
 }).on('error', (error) => {
     console.log('Connection error:', error);
 });

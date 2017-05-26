@@ -5,27 +5,38 @@ import { logout } from '../actions/authActions';
 import PropTypes from 'prop-types';
 
 class NavigationBar extends React.Component {
-  logout(e) {
+  logout = (e) => {
     e.preventDefault();
     this.props.logout();
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, isAdmin } = this.props.auth;
 
     const userLinks = (
       <div className="ui menu">
         <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
         <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
         <div className="right menu">
-          <NavLink className="item" to="/admin" activeClassName="active">Admin</NavLink>
-          <a href="/" className="item" onClick={this.logout.bind(this)}>Logout</a>
+          <a href="/" className="item" onClick={this.logout}>Logout</a>
         </div>
       </div>
     );
 
-    const guestLinks = (
+    const adminLinks = (
+      <div className="ui menu">
+        <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
+        <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
+        <div className="right menu">
+          <NavLink className="item" to="/admin" activeClassName="active">Admin</NavLink>
+          <a href="/" className="item" onClick={this.logout}>Logout</a>
+        </div>
+      </div>
+    );
 
+    const authLinks = isAdmin ? adminLinks : userLinks;
+
+    const guestLinks = (
       <div className="ui menu">
         <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
         <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
@@ -38,7 +49,7 @@ class NavigationBar extends React.Component {
 
     return (
       <nav className="navbar">
-        { isAuthenticated ? userLinks : guestLinks }
+        { isAuthenticated ? authLinks : guestLinks }
       </nav>
     );
   }

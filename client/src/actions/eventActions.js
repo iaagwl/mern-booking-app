@@ -45,6 +45,6 @@ export function deleteEvent(id) {
         type: 'success',
         text: 'Class successfully deleted'
       }))
-    });
+    }).catch(err => console.log(err));
   }
 }

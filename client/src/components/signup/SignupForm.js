@@ -120,6 +120,7 @@ class SignupForm extends React.Component {
 
         <input disabled={this.state.isLoading || this.state.invalid}
           type="submit"
+          className="ui primary button"
         />
       </form>
     );

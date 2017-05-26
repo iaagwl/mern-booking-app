@@ -14,11 +14,13 @@ class EventForm extends React.Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    this.setState({
-      _id: nextProps.gymclass._id,
-      title: nextProps.gymclass.title,
-      date: nextProps.gymclass.date,
-    })
+    if (nextProps.gymclass) {
+      this.setState({
+        _id: nextProps.gymclass._id,
+        title: nextProps.gymclass.title,
+        date: nextProps.gymclass.date,
+      });
+    }
   }
 
   handleChange = (e) => {

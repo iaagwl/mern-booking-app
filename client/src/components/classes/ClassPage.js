@@ -17,7 +17,7 @@ class ClassPage extends React.Component {
 
         <ClassList
           gymclasses={this.props.gymclasses}
-          isAuthenticated={this.props.auth.isAuthenticated}
+          isAdmin={this.props.auth.isAdmin}
           deleteClass={this.props.deleteEvent}
         />
       </div>

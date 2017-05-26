@@ -6,17 +6,17 @@ import { addFlashMessage } from '../actions/flashMessages';
 export default function(ComposedComponent) {
   class Authenticate extends React.Component {
     componentWillMount() {
-      if (!this.props.isAuthenticated) {
+      if (!this.props.isAdmin) {
         this.props.addFlashMessage({
           type: 'error',
-          text: 'You need to login to access this page'
+          text: 'You need to login as admin to access this page'
         });
         this.context.router.history.push('/login');
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (!nextProps.isAuthenticated) {
+      if (!nextProps.isAdmin) {
         this.context.router.history.push('/');
       }
     }
@@ -29,7 +29,7 @@ export default function(ComposedComponent) {
   }
 
   Authenticate.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
     addFlashMessage: PropTypes.func.isRequired
   }
 
@@ -39,7 +39,7 @@ export default function(ComposedComponent) {
 
   function mapStateToProps(state) {
     return {
-      isAuthenticated: state.auth.isAuthenticated
+      isAdmin: state.auth.isAdmin
     };
   }
 

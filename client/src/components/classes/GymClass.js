@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function GymClass({ gymclass, deleteClass, isAuthenticated }) {
+export default function GymClass({ gymclass, deleteClass, isAdmin }) {
 
   const authButtons = (
     <div className="extra content">
@@ -21,7 +21,7 @@ export default function GymClass({ gymclass, deleteClass, isAuthenticated }) {
         </div>
         {gymclass.date}
       </div>
-      { isAuthenticated ? authButtons : null }
+      { isAdmin ? authButtons : null }
     </div>
   )
 }
