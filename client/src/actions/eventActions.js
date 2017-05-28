@@ -10,6 +10,7 @@ export function addClass(gymclass){
 }
 
 export function classUpdated(gymclass){
+  console.log('classupdated ',gymclass);
   return {
     type: GYM_CLASS_UPDATED,
     gymclass
@@ -26,6 +27,13 @@ export function classDeleted(id){
 export function updateEvent(data) {
   return dispatch => {
     return axios.put(`/api/gymclasses/${data._id}`, data)
+      .then(res => dispatch(classUpdated(res.data.gymclass)));
+  }
+}
+
+export function applyForEvent(id) {
+  return dispatch => {
+    return axios.put(`/api/gymclasses/apply/${id}`)
       .then(res => dispatch(classUpdated(res.data.gymclass)));
   }
 }

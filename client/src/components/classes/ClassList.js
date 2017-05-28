@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import GymClass from './GymClass';
 
-export default function ClassList({ gymclasses, deleteClass, isAdmin }) {
+export default function ClassList({ gymclasses, deleteClass, isAdmin, isAuthenticated, applyForClass }) {
   const emptyMessage = (
     <p>There are no upcoming classes</p>
   );
@@ -15,6 +15,8 @@ export default function ClassList({ gymclasses, deleteClass, isAdmin }) {
             deleteClass={deleteClass}
             key={gymclass._id}
             isAdmin={isAdmin}
+            isAuthenticated={isAuthenticated}
+            applyForClass={applyForClass}
           />
         )
       }
@@ -29,5 +31,6 @@ export default function ClassList({ gymclasses, deleteClass, isAdmin }) {
 
 ClassList.propTypes = {
   gymclasses: PropTypes.array.isRequired,
-  deleteClass: PropTypes.func.isRequired
+  deleteClass: PropTypes.func.isRequired,
+  applyForClass: PropTypes.func.isRequired
 };

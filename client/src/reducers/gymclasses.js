@@ -9,6 +9,7 @@ export default function gymclasses(state = [], action = {}) {
       ];
 
     case GYM_CLASS_UPDATED:
+      action.gymclass.hasapplied = true;
       return state.map(item => {
         if (item._id === action.gymclass._id) return action.gymclass
         return item;

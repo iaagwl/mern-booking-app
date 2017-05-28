@@ -9,7 +9,7 @@ class EventForm extends React.Component {
     _id: this.props.gymclass ? this.props.gymclass._id : null,
     title: this.props.gymclass ? this.props.gymclass.title : '',
     date: this.props.gymclass ? this.props.gymclass.date : '',
-    spots: this.props.gymclass ? this.props.gymclass.spots : '',
+    spots: this.props.gymclass ? this.props.gymclass.maxspots : '',
     errors: {},
     isLoading: false
   };
@@ -20,6 +20,7 @@ class EventForm extends React.Component {
         _id: nextProps.gymclass._id,
         title: nextProps.gymclass.title,
         date: nextProps.gymclass.date,
+        spots: nextProps.gymclass.maxspots
       });
     }
   }
@@ -56,11 +57,10 @@ class EventForm extends React.Component {
   }
 
   render() {
-    const { title, errors, isLoading, date, spots } = this.state;
-    console.log(this.state);
+    const { title, errors, isLoading, date, spots, _id } = this.state;
     const form = (
       <form className={classnames('ui', 'form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
-        <h1>Create New</h1>
+        { _id ? <h1>Update</h1> : <h1>Create New</h1> }
 
         {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
         <TextFieldGroup

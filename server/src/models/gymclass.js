@@ -2,7 +2,12 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const AttendeesSchema = new Schema({
-  name: String,
+  username: {
+    type: String
+  },
+  email: {
+    type: String
+  }
 });
 
 const ClassSchema = new Schema({
@@ -11,6 +16,10 @@ const ClassSchema = new Schema({
     required: true
   },
   date: {
+    type: String,
+    required: true
+  },
+  maxspots: {
     type: String,
     required: true
   },

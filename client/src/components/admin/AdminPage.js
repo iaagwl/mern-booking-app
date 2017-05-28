@@ -1,5 +1,6 @@
 import React from 'react';
 import EventForm from './EventForm';
+import AttendeeList from '../attendees/AttendeeList';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -8,18 +9,22 @@ import { fetchClass } from '../../actions/classesActions';
 
 class AdminPage extends React.Component {
   state = {
-    redirect: false
+    redirect: false,
+    attendees: []
   };
 
   componentDidMount = () => {
     const { match } = this.props;
     if (match.params._id) {
-      this.props.fetchClass(match.params._id);
+      this.props.fetchClass(match.params._id)
+        .then(gymclass => {
+          console.log(gymclass.gymclass.attendees);
+          this.setState({attendees: gymclass.gymclass.attendees});
+        });
     }
   }
 
   saveClass = ({_id, title, date, spots}) => {
-    console.log(spots);
     if (_id) {
       return this.props.updateEvent({_id, title, date, spots}).then(
         () => { this.setState({ redirect: true })},
@@ -37,10 +42,13 @@ class AdminPage extends React.Component {
         {
           this.state.redirect ?
           <Redirect to="/classes" /> :
-          <EventForm
-            gymclass={this.props.gymclass}
-            saveClass={this.saveClass}
-          />
+          <div>
+            <EventForm
+              gymclass={this.props.gymclass}
+              saveClass={this.saveClass}
+            />
+            {this.props.match.params._id ? <AttendeeList attendees={this.state.attendees}/> : null}
+          </div>
         }
       </div>
     );
