@@ -9,7 +9,6 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   const { identifier, password } = req.body;
-
   User.findOne({
     $or: [
       {username: identifier},

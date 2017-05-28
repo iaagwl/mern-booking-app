@@ -20,7 +20,10 @@ const TextFieldGroup = ({ field, value, label, error, type, handleChange, checkU
 
 TextFieldGroup.propTypes = {
   field: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   label: PropTypes.string.isRequired,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,

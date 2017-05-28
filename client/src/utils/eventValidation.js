@@ -10,6 +10,12 @@ export default function validateInput(data) {
   if (Validator.isEmpty(data.date)) {
     errors.date = 'This field is required';
   }
+  if (!Validator.isInt(data.spots)) {
+    errors.spots = 'Needs to be a number';
+  }
+  if (Validator.isEmpty(data.spots)) {
+    errors.spots = 'This field is required';
+  }
   return {
     errors,
     isValid: isEmpty(errors)

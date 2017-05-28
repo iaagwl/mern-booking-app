@@ -8,7 +8,7 @@ import GymClass from '../models/gymclass';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  GymClass.find({}, 'title date _id')
+  GymClass.find({}, 'title date _id spots')
     .then( gymclasses => res.json({ gymclasses }))
     .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
 });
@@ -34,8 +34,8 @@ router.post('/', authenticate, (req, res) => {
     let { errors, isValid } = validateInput(req.body);
 
     if (isValid) {
-      const { title, date } = req.body;
-      GymClass.create({ title, date })
+      const { title, date, spots } = req.body;
+      GymClass.create({ title, date, spots })
       .then(event => res.json({ gymclass: event }))
       .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
     } else {
@@ -52,8 +52,8 @@ router.put('/:_id', authenticate, (req, res) => {
     let { errors, isValid } = validateInput(req.body);
 
     if (isValid) {
-      const { title, date } = req.body;
-      GymClass.findByIdAndUpdate(req.params._id, { title, date }, { new: true })
+      const { title, date, spots } = req.body;
+      GymClass.findByIdAndUpdate(req.params._id, { title, date, spots }, { new: true })
       .then(gymclass => res.json({ gymclass: gymclass }))
       .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
     } else {

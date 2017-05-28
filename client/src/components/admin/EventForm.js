@@ -9,6 +9,7 @@ class EventForm extends React.Component {
     _id: this.props.gymclass ? this.props.gymclass._id : null,
     title: this.props.gymclass ? this.props.gymclass.title : '',
     date: this.props.gymclass ? this.props.gymclass.date : '',
+    spots: this.props.gymclass ? this.props.gymclass.spots : '',
     errors: {},
     isLoading: false
   };
@@ -47,15 +48,16 @@ class EventForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.isValid()){
-      const { _id, title, date } = this.state;
+      const { _id, title, date, spots } = this.state;
       this.setState({ errors: {}, isLoading: true });
-      this.props.saveClass({ _id, title, date })
+      this.props.saveClass({ _id, title, date, spots })
         .catch((err) => this.setState({ errors: err.response.data.errors, isLoading: false }));
     }
   }
 
   render() {
-    const { title, errors, isLoading, date } = this.state;
+    const { title, errors, isLoading, date, spots } = this.state;
+    console.log(this.state);
     const form = (
       <form className={classnames('ui', 'form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
         <h1>Create New</h1>
@@ -77,6 +79,16 @@ class EventForm extends React.Component {
           value={date}
           handleChange={this.handleChange}
           error={errors.date}
+        />
+
+        <TextFieldGroup
+          field="spots"
+          label="Spots"
+          name="spots"
+          value={spots}
+          handleChange={this.handleChange}
+          error={errors.spots}
+          type="number"
         />
 
         <div className="field">

@@ -18,7 +18,11 @@ export function classFetched(gymclass) {
 export function fetchClasses() {
   return dispatch => {
     return axios.get('/api/gymclasses')
-      .then(res => dispatch(setClasses(res.data.gymclasses)))
+      .then(res => {
+        console.log(res.data.gymclasses);
+        //res.data.gymclasses..toString();
+        dispatch(setClasses(res.data.gymclasses))
+      })
       .catch(err => console.log(err));
   }
 }

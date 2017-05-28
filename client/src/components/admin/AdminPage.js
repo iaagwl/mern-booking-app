@@ -18,13 +18,14 @@ class AdminPage extends React.Component {
     }
   }
 
-  saveClass = ({_id, title, date}) => {
+  saveClass = ({_id, title, date, spots}) => {
+    console.log(spots);
     if (_id) {
-      return this.props.updateEvent({_id, title, date}).then(
+      return this.props.updateEvent({_id, title, date, spots}).then(
         () => { this.setState({ redirect: true })},
       );
     } else {
-       return this.props.createEvent({title, date}).then(
+       return this.props.createEvent({title, date, spots}).then(
         () => { this.setState({ redirect: true })},
       );
     }

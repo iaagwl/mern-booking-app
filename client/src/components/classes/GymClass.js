@@ -19,7 +19,8 @@ export default function GymClass({ gymclass, deleteClass, isAdmin }) {
         <div className="header">
           {gymclass.title}
         </div>
-        {gymclass.date}
+        <div>{gymclass.date}</div>
+        <div>Spots left: {gymclass.spots}</div>
       </div>
       { isAdmin ? authButtons : null }
     </div>

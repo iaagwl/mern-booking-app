@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
+const AttendeesSchema = new Schema({
+  name: String,
+});
+
 const ClassSchema = new Schema({
   title: {
     type: String,
@@ -9,6 +13,14 @@ const ClassSchema = new Schema({
   date: {
     type: String,
     required: true
+  },
+  spots: {
+    type: String,
+    required: true
+  },
+  attendees: {
+    type: [AttendeesSchema],
+    default: []
   }
 });
 
