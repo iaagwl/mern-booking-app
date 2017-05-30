@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import commonValidations from '../validations/signup';
 import isEmpty from 'lodash/isEmpty';
+import config from '../../config';
 
 import User from '../../models/user';
 
@@ -31,18 +32,10 @@ function validateInput(data, otherValidations) {
   });
 }
 
-const adminUserDetails = {
-  username: 'admin',
-  email: 'admin@admin.admin',
-  password: 'admin',
-  passwordConfirmation: 'admin',
-  errors: { username: '', email: '' }
-}
-
 export default function adminInit() {
-  validateInput(adminUserDetails, commonValidations).then(({ errors, isValid }) => {
+  validateInput(config.adminUserDetails, commonValidations).then(({ errors, isValid }) => {
     if (isValid) {
-      const { username, password, email, _id } = adminUserDetails;
+      const { username, password, email, _id } = config.adminUserDetails;
       const password_digest = bcrypt.hashSync(password, 10);
       new User({
         username: username, email: email, password_digest: password_digest

@@ -60,10 +60,7 @@ router.put('/:_id', authenticate, (req, res) => {
       GymClass.findByIdAndUpdate(req.params._id, { title, date, maxspots: spots }, { new: true })
         .then(gymclass => {
           GymClass.findByIdAndUpdate(req.params._id, {spots: gymclass.maxspots - gymclass.attendees.length }, { select: 'title date spots maxspots', new: true })
-            .then(gymclass => {
-              res.json({ gymclass: gymclass });
-            })
-            .catch(err => res.status(500).json({ errors: { global: "Something went wrong1"}}));
+            .then(gymclass => res.json({ gymclass: gymclass }));
         })
         .catch(err => res.status(500).json({ errors: { global: "Something went wrong2" }}));
     } else {
@@ -88,11 +85,7 @@ router.put('/apply/:_id', authenticate, (req, res) => {
               $push: { "attendees": {_id: req.currentUser._id, username: req.currentUser.username, email: req.currentUser.email}},
               spots: maxspots - attendees.length - 1
             }, {select: 'title date spots maxspots', new: true })
-            .then(gymclass => {
-              console.log(gymclass);
-              res.json({ gymclass: gymclass });
-            })
-            .catch(err => res.status(500).json({ errors: { global: "Something went wrong"}}));
+            .then(gymclass => res.json({ gymclass: gymclass }));
           }
         } else {
           res.status(403).json({ errors: { global: 'You have already registered to this class'}});

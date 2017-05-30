@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function GymClass({ gymclass, deleteClass, isAdmin, isAuthenticated, applyForClass }) {
-  console.log('APPLIED???', gymclass.hasapplied);
   const adminButtons = (
     <div className="extra content">
       <div className="ui two buttons">

@@ -18,7 +18,6 @@ class AdminPage extends React.Component {
     if (match.params._id) {
       this.props.fetchClass(match.params._id)
         .then(gymclass => {
-          console.log(gymclass.gymclass.attendees);
           this.setState({attendees: gymclass.gymclass.attendees});
         });
     }

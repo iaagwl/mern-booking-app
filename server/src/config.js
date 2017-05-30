@@ -1,3 +1,10 @@
 export default {
-  jwtSecret: 'VERYSECRETKEY'
+  jwtSecret: 'VERYSECRETKEY',
+  adminUserDetails: {
+    username: 'admin',
+    email: 'admin@admin.admin',
+    password: 'admin',
+    passwordConfirmation: 'admin',
+    errors: { username: '', email: '' }
+  }
 }
