@@ -41,8 +41,8 @@ router.post('/', authenticate, (req, res) => {
     if (isValid) {
       const { title, date, spots } = req.body;
       GymClass.create({ title, date, spots, maxspots: spots })
-      .then(event => res.json({ gymclass: event }))
-      .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
+        .then(event => res.json({ gymclass: event }))
+        .catch(err => res.status(500).json({ errors: { global: "Something went wrong" }}));
     } else {
       res.status(400).json({ errors });
     }
@@ -54,12 +54,12 @@ router.post('/', authenticate, (req, res) => {
 router.put('/:_id', authenticate, (req, res) => {
   if (req.currentUser.username === 'admin'){
     let { errors, isValid } = validateInput(req.body);
-
     if (isValid) {
       const { title, date, spots } = req.body;
       GymClass.findByIdAndUpdate(req.params._id, { title, date, maxspots: spots }, { new: true })
         .then(gymclass => {
-          GymClass.findByIdAndUpdate(req.params._id, {spots: gymclass.maxspots - gymclass.attendees.length }, { select: 'title date spots maxspots', new: true })
+          const { maxspots, attendees } = gymclass;
+          GymClass.findByIdAndUpdate(req.params._id, {spots: maxspots - attendees.length }, { select: 'title date spots maxspots', new: true })
             .then(gymclass => res.json({ gymclass: gymclass }));
         })
         .catch(err => res.status(500).json({ errors: { global: "Something went wrong2" }}));
@@ -81,11 +81,12 @@ router.put('/apply/:_id', authenticate, (req, res) => {
           if (maxspots - attendees.length < 1) {
             res.status(403).json({ errors: { global: 'The class is full' }});
           } else {
+            const { _id, username, email } = req.currentUser;
             GymClass.findByIdAndUpdate(req.params._id, {
-              $push: { "attendees": {_id: req.currentUser._id, username: req.currentUser.username, email: req.currentUser.email}},
+              $push: { "attendees": { _id, username, email}},
               spots: maxspots - attendees.length - 1
             }, {select: 'title date spots maxspots', new: true })
-            .then(gymclass => res.json({ gymclass: gymclass }));
+              .then(gymclass => res.json({ gymclass: gymclass }));
           }
         } else {
           res.status(403).json({ errors: { global: 'You have already registered to this class'}});
