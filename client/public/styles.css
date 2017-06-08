@@ -172,6 +172,14 @@ nav .right-menu a.active{
   margin-bottom: 10px;
 }
 
+.field:last-of-type {
+  margin-bottom: 18px;
+}
+
+.form input.button {
+  margin: 0;
+}
+
 form label{
   display: block;
 }
@@ -288,6 +296,7 @@ button.close{
 }
 
 .close {
+  color: #fff;
   opacity: 0.9;
   font-weight: 700;
   font-size: 1.5rem;
