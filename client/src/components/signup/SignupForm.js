@@ -78,51 +78,52 @@ class SignupForm extends React.Component {
     const { errors } = this.state;
 
     return (
-      <form className={classnames('ui', 'form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
-        <h1>Sign Up</h1>
+      <div className="signup-form">
+        <form className={classnames('form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
 
-        <TextFieldGroup
-          error={errors.username}
-          label="Username"
-          handleChange={this.handleChange}
-          checkUserExists={this.checkUserExists}
-          value={this.state.username}
-          field="username"
-        />
+          <TextFieldGroup
+            error={errors.username}
+            label="Username"
+            handleChange={this.handleChange}
+            checkUserExists={this.checkUserExists}
+            value={this.state.username}
+            field="username"
+          />
 
-        <TextFieldGroup
-          error={errors.email}
-          label="Email"
-          handleChange={this.handleChange}
-          checkUserExists={this.checkUserExists}
-          value={this.state.email}
-          field="email"
-          type="email"
-        />
+          <TextFieldGroup
+            error={errors.email}
+            label="Email"
+            handleChange={this.handleChange}
+            checkUserExists={this.checkUserExists}
+            value={this.state.email}
+            field="email"
+            type="email"
+          />
 
-        <TextFieldGroup
-          error={errors.password}
-          label="Password"
-          handleChange={this.handleChange}
-          value={this.state.password}
-          field="password"
-          type="password"
-        />
+          <TextFieldGroup
+            error={errors.password}
+            label="Password"
+            handleChange={this.handleChange}
+            value={this.state.password}
+            field="password"
+            type="password"
+          />
 
-        <TextFieldGroup
-          error={errors.passwordConfirmation}
-          label="Password Confirmation"
-          handleChange={this.handleChange}
-          value={this.state.passwordConfirmation}
-          field="passwordConfirmation"
-          type="password"
-        />
+          <TextFieldGroup
+            error={errors.passwordConfirmation}
+            label="Password Confirmation"
+            handleChange={this.handleChange}
+            value={this.state.passwordConfirmation}
+            field="passwordConfirmation"
+            type="password"
+          />
 
-        <input disabled={this.state.isLoading || this.state.invalid}
-          type="submit"
-          className="ui primary button"
-        />
-      </form>
+          <input disabled={this.state.isLoading || this.state.invalid}
+            type="submit"
+            className="button blue"
+          />
+        </form>
+      </div>
     );
   }
 }

@@ -59,8 +59,7 @@ class LoginForm extends React.Component {
   render() {
     const { errors, identifier, password, isLoading } = this.state;
     return (
-      <form className={classnames('ui', 'form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
-        <h1>Login</h1>
+      <form className={classnames('form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
 
         { errors.form && <div className="alert alert-danger">{errors.form}</div>}
 
@@ -82,7 +81,7 @@ class LoginForm extends React.Component {
 
         <input disabled={isLoading}
           type="submit"
-          className="ui primary button"
+          className="button blue"
         />
       </form>
     );

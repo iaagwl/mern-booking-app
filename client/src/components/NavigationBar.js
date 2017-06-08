@@ -14,22 +14,30 @@ class NavigationBar extends React.Component {
     const { isAuthenticated, isAdmin } = this.props.auth;
 
     const userLinks = (
-      <div className="ui menu">
-        <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
-        <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
-        <div className="right menu">
-          <a href="/" className="item" onClick={this.logout}>Logout</a>
+      <div className="menu">
+        <div className="left-menu">
+          <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
+        </div>
+        <div className="right-menu">
+          <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
+          <div className="user-menu">
+            <a href="/" className="item" onClick={this.logout}>Logout</a>
+          </div>
         </div>
       </div>
     );
 
     const adminLinks = (
-      <div className="ui menu">
-        <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
-        <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
-        <div className="right menu">
+      <div className="menu">
+        <div className="left-menu">
+          <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
+        </div>
+        <div className="right-menu">
+          <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
           <NavLink className="item" to="/admin" activeClassName="active">Admin</NavLink>
-          <a href="/" className="item" onClick={this.logout}>Logout</a>
+          <div className="user-menu">
+            <a href="/" className="item" onClick={this.logout}>Logout</a>
+          </div>
         </div>
       </div>
     );
@@ -38,11 +46,15 @@ class NavigationBar extends React.Component {
 
     const guestLinks = (
       <div className="ui menu">
-        <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
-        <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
-        <div className="right menu">
-          <NavLink className="item" to="/signup" activeClassName="active">Signup</NavLink>
-          <NavLink className="item" to="/login" activeClassName="active">Login</NavLink>
+        <div className="left-menu">
+          <NavLink className="item" to="/" exact activeClassName="active">Home</NavLink>
+        </div>
+        <div className="right-menu">
+          <NavLink className="item" to="/classes" activeClassName="active">Classes</NavLink>
+          <div className="user-menu">
+            <NavLink className="item" to="/signup" activeClassName="active">Signup</NavLink>
+            <NavLink className="item" to="/login" activeClassName="active">Login</NavLink>
+          </div>
         </div>
       </div>
     );

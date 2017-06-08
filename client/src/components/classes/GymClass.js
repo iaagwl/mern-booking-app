@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 
 export default function GymClass({ gymclass, deleteClass, isAdmin, isAuthenticated, applyForClass }) {
   const adminButtons = (
-    <div className="extra content">
-      <div className="ui two buttons">
-        <Link to={`/admin/gymclass/${gymclass._id}`} className="ui basic button green">Info / Edit</Link>
+    <div className="extra-content">
+      <div className="buttons">
+        <Link to={`/admin/gymclass/${gymclass._id}`} className="button blue">Info / Edit</Link>
         <button className="ui basic button red" onClick={() => deleteClass(gymclass._id)}>Delete</button>
       </div>
     </div>
   );
 
   const userButtons = (
-    <div className="extra content">
-      <div className="ui two buttons">
-        <button disabled={gymclass.hasapplied} className="ui basic button green" onClick={() => applyForClass(gymclass._id)}>Apply</button>
+    <div className="extra-content">
+      <div className="buttons">
+        <button disabled={gymclass.hasapplied} className="button blue" onClick={() => applyForClass(gymclass._id)}>Apply</button>
       </div>
     </div>
   );
@@ -23,15 +23,17 @@ export default function GymClass({ gymclass, deleteClass, isAdmin, isAuthenticat
   const authButton = isAdmin ? adminButtons : userButtons;
 
   return (
-    <div className="ui card">
-      <div className="content">
-        <div className="header">
-          {gymclass.title}
+    <div className="card">
+      <div className="card-wrapper">
+        <div className="content">
+          <div className="header">
+            {gymclass.title}
+          </div>
+          <div>{gymclass.date}</div>
+          <div>Spots left: {gymclass.spots}</div>
         </div>
-        <div>{gymclass.date}</div>
-        <div>Spots left: {gymclass.spots}</div>
+        { isAuthenticated ? authButton : null }
       </div>
-      { isAuthenticated ? authButton : null }
     </div>
   )
 }

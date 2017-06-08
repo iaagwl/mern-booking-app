@@ -19,8 +19,8 @@ export default function AttendeeList({ attendees }) {
     </div>
   );
   return (
-    <div>
-      <h2>Attendees</h2>
+    <div className="attendees">
+      <h1>Attendees</h1>
       {attendees.length === 0 ? emptyMessage : attendeeList }
     </div>
   );

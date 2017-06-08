@@ -1,12 +1,236 @@
+*{
+  color: #525c65;
+}
+
 body{
   line-height: 1.5em;
   font-weight: 400;
-  font-family: Roboto, sans-serif;
+  font-family: "Open Sans", sans-serif;
+  background-color: #fafbfc;
+  color: #525c65;
 }
 
-/* selected nav */
-.selected{
-  color: green;
+h1{
+  font-weight: 300;
+  font-size: 54px;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(82,92,101,0.4);
+  display: block;
+}
+
+.wrapper{
+  width: 60%;
+  margin: auto;
+  background: #fff;
+  height: 100vh;
+  padding: 100px 40px;
+}
+
+nav{
+  z-index: 3;
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+}
+
+nav .menu{
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .left-menu{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+nav .left-menu a{
+  display: block;
+  background: url(./images/logo1.png) no-repeat left center;
+  height: 40px;
+  width: 220px;
+  text-indent: 9999px;
+}
+
+nav .right-menu{
+  font-size: 14px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .right-menu a{
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  flex: 1;
+}
+
+nav .right-menu .user-menu{
+  flex: 1;
+  border-left: 1px solid rgba(82,92,101,0.4);
+  display: flex;
+  justify-content: space-around;
+}
+
+nav .right-menu a.active{
+  color: #02b3e4;
+}
+
+/* GYM CLASSES */
+.cards{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card{
+  height: auto;
+  flex: 1;
+  max-width: 200px;
+  min-width: 200px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.card-wrapper{
+  width: 100%;
+  background: #fafbfc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
+}
+
+.content{
+  background: #fff;
+  padding: 15px 30px 25px;
+  font-size: 14px;
+}
+
+.content .header{
+  overflow-wrap: break-word;
+  font-size: 24px;
+  margin: 15px 0 20px;
+}
+
+.extra-content{
+  padding: 20px 5px;
+}
+
+/* SIGNUP */
+.signup-form{
+  width: 40%;
+  margin: 50px auto;
+}
+
+.signup-form .button{
+  height: 35px;
+  font-size: 18px;
+}
+
+/* LOGIN */
+.login-form{
+  width: 40%;
+  margin: 50px auto;
+}
+
+.login-form .button{
+  height: 35px;
+  font-size: 18px;
+}
+
+/* Admin */
+.admin-form{
+  width: 40%;
+  margin: 50px auto;
+}
+
+.admin-form .button{
+  height: 35px;
+  font-size: 18px;
+}
+
+/* Attendees */
+.attendees{
+  margin-top: 100px;
+}
+
+/* FORMS */
+.field {
+  margin-bottom: 10px;
+}
+
+form label{
+  display: block;
+}
+
+form input{
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  height: 35px;
+  border: 1px solid rgba(82,92,101,0.4);
+  border-radius: 3px;
+}
+
+form .error span {
+  color: #ff8c8c;
+}
+
+form .error input {
+  border: 1px solid #ff8c8c;
+}
+
+/* BUTTONS */
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.button{
+  outline: none;
+  color: #fff;
+  font-weight: bold;
+  display: block;
+  flex-grow: 1;
+  padding: 5px;
+  margin: 0 2px;
+  border: none;
+  font-size: 12px;
+  font-family: "Open Sans";
+  text-decoration: none;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.blue{
+  background-color: #02b3e4;
+}
+
+.blue:active{
+  background-color: #0598c1;
+}
+
+.red{
+  background-color: #ff8c8c;
+}
+
+.red:active{
+  background-color: #e07070;
 }
 
 /* form validation errors */
@@ -16,17 +240,28 @@ body{
 
 /* flash messages */
 .alert{
-  width: 100%;
+  position: absolute;
+  left: 25%;
+  top: 75px;
+  width: 50%;
   padding: 20px;
   border-radius: 10px;
   border: 1px solid;
   box-sizing: border-box;
+  opacity: 0.8;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
 }
 
 .alert-success{
-  background-color: #dff0d8;
-  color: #3c763d;
-  border-color: #d0e9c6;
+  background-color: #71cee8;
+  border-color: #62bcd6;
+}
+
+.alert-success .flash-text{
+  color: #fff;
+  padding-top: 2px;
 }
 
 .alert-danger{
@@ -34,8 +269,13 @@ body{
   color: #a94442;
   border-color: #ebcccc;
 }
+.alert-danger .flash-text{
+  color: #a94442;
+  padding-top: 2px;
+}
 
 button.close{
+  order: 2;
   padding: 0;
   cursor: pointer;
   background: 0;
@@ -44,8 +284,12 @@ button.close{
 }
 
 .close {
-  color: #000;
-  opacity: 0.5;
+  color: #fff;
+  opacity: 0.9;
   font-weight: 700;
   font-size: 1.5rem;
+}
+
+.close span{
+  color: #fff;
 }

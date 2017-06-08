@@ -61,38 +61,40 @@ class EventForm extends React.Component {
     const form = (
       <form className={classnames('ui', 'form', { loading: this.state.isLoading })} onSubmit={this.handleSubmit}>
         { _id ? <h1>Update</h1> : <h1>Create New</h1> }
+        <div className="admin-form">
+          {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
+          <TextFieldGroup
+            field="title"
+            label="Event Title"
+            name="title"
+            value={title}
+            handleChange={this.handleChange}
+            error={errors.title}
+          />
 
-        {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
-        <TextFieldGroup
-          field="title"
-          label="Event Title"
-          name="title"
-          value={title}
-          handleChange={this.handleChange}
-          error={errors.title}
-        />
+          <TextFieldGroup
+            field="date"
+            label="Date"
+            name="date"
+            value={date}
+            handleChange={this.handleChange}
+            error={errors.date}
+          />
 
-        <TextFieldGroup
-          field="date"
-          label="Date"
-          name="date"
-          value={date}
-          handleChange={this.handleChange}
-          error={errors.date}
-        />
+          <TextFieldGroup
+            field="spots"
+            label="Spots"
+            name="spots"
+            value={spots}
+            handleChange={this.handleChange}
+            error={errors.spots}
+            type="number"
+          />
 
-        <TextFieldGroup
-          field="spots"
-          label="Spots"
-          name="spots"
-          value={spots}
-          handleChange={this.handleChange}
-          error={errors.spots}
-          type="number"
-        />
-
-        <div className="field">
-          <button className="ui primary button" disabled={isLoading}>Save</button>
+          <input disabled={isLoading}
+            type="submit"
+            className="button blue"
+          />
         </div>
       </form>
     );

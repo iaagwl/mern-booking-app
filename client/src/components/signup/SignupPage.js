@@ -11,6 +11,7 @@ class SignupPage extends React.Component {
 
     return(
       <div className="signup-container">
+        <h1>Sign Up</h1>
         <SignupForm
           doesUserExist={doesUserExist}
           userSignupRequest={userSignupRequest}

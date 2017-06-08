@@ -33,9 +33,9 @@ class ClassPage extends React.Component {
 
   render() {
     return (
-      <div className={classnames('ui', 'form', { loading: this.state.isLoading })}>
+      <div className={classnames('gymclasses', { loading: this.state.isLoading })}>
 
-        <h1>Classes:</h1>
+        <h1>Gym Classes</h1>
         {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
         <ClassList
           gymclasses={this.props.gymclasses}

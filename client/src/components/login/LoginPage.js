@@ -6,7 +6,10 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        <LoginForm />
+        <h1>Login</h1>
+        <div className="login-form">
+          <LoginForm />
+        </div>
       </div>
     );
   }
