@@ -199,6 +199,10 @@ form .error input {
   justify-content: space-between;
 }
 
+.negative p{
+  color: #ff8c8c;
+}
+
 .button{
   outline: none;
   color: #fff;
@@ -284,10 +288,13 @@ button.close{
 }
 
 .close {
-  color: #fff;
   opacity: 0.9;
   font-weight: 700;
   font-size: 1.5rem;
+}
+
+.alert-danger .close span{
+  color: #a94442;
 }
 
 .close span{

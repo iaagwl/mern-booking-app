@@ -27,16 +27,23 @@ class ClassPage extends React.Component {
         })
         this.setState({ isLoading: false });
       },
-      (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
-    );;
-  }
+      (err) => {
+        console.log(err);
+        this.props.addFlashMessage({
+          type: 'error',
+          text: err.response.data.errors.global
+        })
+        this.setState({ isLoading: false })
+      }
+    )};
 
   render() {
     return (
       <div className={classnames('gymclasses', { loading: this.state.isLoading })}>
 
         <h1>Gym Classes</h1>
-        {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
+
+        {!!this.state.errors.global && <div className="alert alert-danger">{this.state.errors.global}</div>}
         <ClassList
           gymclasses={this.props.gymclasses}
           isAdmin={this.props.auth.isAdmin}
